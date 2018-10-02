@@ -1,0 +1,79 @@
+/**
+ * This file contains the schema of the database.
+ *
+ * Books
+ *   |___ISBN
+ *   | |
+ *   | |___Primary Key
+ *   |
+ *   |___Title
+ *   |
+ *   |___Author Name
+ *   |
+ *   |___Publisher name
+ *   |
+ *   |___Genre
+ *   |
+ *   |___Description
+ *   |
+ *   |___Stock
+ *
+ *
+ * User
+ *   |
+ *   |___Student id
+ *   | |
+ *   | |___Primary Key
+ *   |
+ *   |___Student name
+ *   |
+ *   |___Password
+ *   |
+ *   |___E-mail id
+ *   |
+ *   |___Available issue slots
+ *
+ *
+ * Issue History
+ *   |
+ *   |___User ID
+ *   | |
+ *   | |___Foregin key to User.id
+ *   |
+ *   |___Book ID
+ *   | |
+ *   | |___Foregin key to Books.id
+ *   |
+ *   |___Issue date
+ *   |
+ *   |___Rating
+ *   |
+ *   |___Return status
+ *
+ **/
+
+Books(
+     ISBN as PRIMARY KEY,
+     title,
+     author_name,
+     publisher_name,
+     genre,
+     stock,
+     description
+)
+
+User(
+    id as PRIMARY KEY,
+    name,
+    hashed_password,
+    email_id,
+    available_issue_slots
+)
+
+Issue_history(
+    user_id as FOREIGN KEY TO User.id,
+    book_id as a FOREIGN KEY TO Books.id,
+    issue_date,
+    rating,
+    return_status
+)
