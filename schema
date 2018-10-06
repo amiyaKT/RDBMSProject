@@ -10,28 +10,44 @@
  *   |
  *   |___Author Name
  *   |
+ *   |___Image URL
+ *   |
  *   |___Publisher name
  *   |
  *   |___Genre
+ *   | |
+ *   | |___Foregin key to Genre
  *   |
  *   |___Description
  *   |
  *   |___Stock
- *
- *
- * User
  *   |
- *   |___Student id
+ *   |___Rating
+ *
+ *
+ * users
+ *   |
+ *   |___id
  *   | |
  *   | |___Primary Key
  *   |
- *   |___Student name
+ *   |___firstname
+ *   |
+ *   |___lastname
  *   |
  *   |___Password
  *   |
  *   |___E-mail id
  *   |
- *   |___Available issue slots
+ *   |___Number of books issued
+ *   |
+ *   |___Profile Image
+ *   |
+ *   |___isAdmin
+ *   |
+ *   |___address
+ *   |
+ *   |___username
  *
  *
  * Issue History
@@ -50,30 +66,10 @@
  *   |
  *   |___Return status
  *
+ *
+ *   Genre
+ *   |
+ *   |___ID as PRIMARY KEY
+ *   |
+ *   |___Name
  **/
-
-Books(
-     ISBN as PRIMARY KEY,
-     title,
-     author_name,
-     publisher_name,
-     genre,
-     stock,
-     description
-)
-
-User(
-    id as PRIMARY KEY,
-    name,
-    hashed_password,
-    email_id,
-    available_issue_slots
-)
-
-Issue_history(
-    user_id as FOREIGN KEY TO User.id,
-    book_id as a FOREIGN KEY TO Books.id,
-    issue_date,
-    rating,
-    return_status
-)
