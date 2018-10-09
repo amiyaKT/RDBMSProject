@@ -1,4 +1,5 @@
 const express = require('express'),
+      pool = require('../database/database.js'),
       router = express.Router();
 
 router.get('/', (req, res) => {

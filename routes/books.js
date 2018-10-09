@@ -1,18 +1,30 @@
 const express = require('express'),
+      pool = require('../database/database'),
       router = express.Router();
 
 // BOOKS ROUTES
 
 router.get('/', (req, res) => {
-  res.render('books/index');
+  pool.query(`SELECT * FROM books`, (err, response) => {
+    res.send(response.rows);
+  });
 });
 
 router.get('/new', (req, res) => {
-  res.render('books/new');
+  pool.query(`SELECT * FROM genre`, (err, response) => {
+    res.render('./books/new', {genres: response.rows});
+  });
 });
 
 router.post('/', (req, res) => {
-  res.send('ADD Book Logic');
+  pool.query(`INSERT INTO books(ISBN, title, author, publisher, image_url, description, genre) VALUES('${req.body.book.ISBN}', '${req.body.book.title}', '${req.body.book.author_name}', '${req.body.book.publisher_name}', '${req.body.book.image_url}', '${req.body.book.description}', ${req.body.book.genre})`, (err, response) => {
+    if (err) {
+      console.log(err.stack);
+    }else{
+      res.redirect('/books');      
+    }
+  });
+  // res.send(req.body.book);
 });
 
 router.get('/:id', (req, res) => {

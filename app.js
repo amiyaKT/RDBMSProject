@@ -1,6 +1,5 @@
 const express = require('express'),
       bodyParser = require('body-parser'),
-      pg = require('pg'),
       app = express();
 
 // ROUTES
@@ -11,17 +10,13 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
-const pool = new pg.Pool ({
-  user: 'amiya',
-  host: '127.0.0.1',
-  database: 'bookdb',
-  password: 'maruti3315',
-  port: '5432'
-});
-
 // ROUTES
 app.use(indexRoute);
 app.use('/books', bookRoute);
+
+app.get('*', (req, res) => {
+  res.render('error');
+});
 
 var server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
 var server_host = process.env.YOUR_HOST || '0.0.0.0';
