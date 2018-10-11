@@ -2,7 +2,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       app = express();
 
-// ROUTES
+// Require Routes
 const indexRoute = require('./routes/indexRoutes'),
       bookRoute = require('./routes/books');
 
@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(indexRoute);
 app.use('/books', bookRoute);
 
+// Error Page Route
 app.get('*', (req, res) => {
   res.render('error');
 });

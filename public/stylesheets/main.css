@@ -1,3 +1,41 @@
 .hideOverflow {
   overflow-y: hidden;
 }
+
+/* General Styles */
+.container-fluid  {
+  margin-top: 75px;
+}
+
+
+/* Login form */
+
+#login .container-fluid {
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Register Form */
+#register .container-fluid {
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+/* Error Page */
+#error .container-fluid {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

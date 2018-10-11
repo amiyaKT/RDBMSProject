@@ -5,14 +5,22 @@ const express = require('express'),
 // BOOKS ROUTES
 
 router.get('/', (req, res) => {
-  pool.query(`SELECT * FROM books`, (err, response) => {
-    res.send(response.rows);
+  pool.query(`SELECT b.id, b.ISBN, b.title, b.title, b.author, b.publisher, b.image_url, b.description, b.rating, g.name FROM books b, genre g WHERE g.id = b.genre`, (err, response) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('./books/index', {books: response.rows});
+    }
   });
 });
 
 router.get('/new', (req, res) => {
   pool.query(`SELECT * FROM genre`, (err, response) => {
-    res.render('./books/new', {genres: response.rows});
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('./books/new', {genres: response.rows});
+    }
   });
 });
 
@@ -21,7 +29,7 @@ router.post('/', (req, res) => {
     if (err) {
       console.log(err.stack);
     }else{
-      res.redirect('/books');      
+      res.redirect('/books');
     }
   });
   // res.send(req.body.book);
