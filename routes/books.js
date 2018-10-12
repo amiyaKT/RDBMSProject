@@ -5,7 +5,7 @@ const express = require('express'),
 // BOOKS ROUTES
 
 router.get('/', (req, res) => {
-  pool.query(`SELECT b.id, b.ISBN, b.title, b.title, b.author, b.publisher, b.image_url, b.description, b.rating, g.name FROM books b, genre g WHERE g.id = b.genre`, (err, response) => {
+  pool.query(`SELECT b.id, b.ISBN, b.title, b.title, b.author, b.publisher, b.image_url, b.rating, g.name FROM books b, genre g WHERE g.id = b.genre`, (err, response) => {
     if(err) {
       console.log(err);
     } else {
@@ -32,11 +32,16 @@ router.post('/', (req, res) => {
       res.redirect('/books');
     }
   });
-  // res.send(req.body.book);
 });
 
 router.get('/:id', (req, res) => {
-  res.render('books/show');
+  pool.query(`SELECT b.ISBN, b.title, b.title, b.author, b.publisher, b.image_url, b.description, b.rating, g.name FROM books b, genre g WHERE g.id = b.genre AND b.id = ${req.params.id}`, (err, response) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render('./books/show', {book: response.rows[0]});
+    }
+  });
 });
 
 router.get('/:id/edit', (req, res) => {

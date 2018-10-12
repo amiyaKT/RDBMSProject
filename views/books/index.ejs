@@ -7,7 +7,7 @@
         <div class="col-md-4">
           <div class="ui card mx-auto">
             <div class="image">
-              <img src="<%= book.image_url %>">
+              <img src="<%= book.image_url %>" class="coverImage ui image fluid">
             </div>
             <div class="content">
               <a href="/books/<%= book.id %>" class="header"><%= book.title %></a>
@@ -27,11 +27,16 @@
                     <p>ISBN: <%= book.isbn %></p>
                   </div>
                 </div>
+                <div class="item">
+                  <div class="content">
+                  Rating:
+                  <div class="ui star rating" data-rating="<%= book.rating %>"></div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="extra">
-              Rating:
-              <div class="ui star rating" data-rating="<%= book.rating %>"></div>
+            <div class="extra center aligned">
+              <a href="/books/<%= book.id %>" class="ui positive button">Read More</a>
             </div>
           </div>
         </div>

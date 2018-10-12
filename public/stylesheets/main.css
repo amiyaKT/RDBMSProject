@@ -7,6 +7,10 @@
   margin-top: 75px;
 }
 
+.coverImage {
+  object-fit: contain;
+}
+
 
 /* Login form */
 
@@ -38,4 +42,9 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+/* Show Page */
+#showDetail .container-fluid .card {
+  box-shadow: none;
 }
