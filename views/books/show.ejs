@@ -34,6 +34,15 @@
               </div>
             </div>
           </div>
+          <div class="extra mx-auto">
+          <div class="ui buttons">
+            <a href="/books/edit/<%= book.id %>" class="ui yellow button">Edit</a>
+            <div class="or"></div>
+            <form action="/books/<%= book.id %>?_method=DELETE" method="POST">
+              <input type="Submit" class="ui red button" value="Delete">
+            </form> 
+          </div>
+          </div>
         </div>
       </div>
 

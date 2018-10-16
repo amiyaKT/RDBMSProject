@@ -1,0 +1,57 @@
+<% include ../partials/header %>
+
+<div class="container-fluid mb-4">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-auto">
+      <div class="ui segment">
+        <form class="ui form" action="/books" method="POST">
+          <h1 class="ui dividing header">Update BOOK DETAILS</h1>
+          <div class="field">
+            <label>ISBN</label>
+            <input type="number" name="book[ISBN]" placeholder="ISBN" autocomplete="off" value="<%= book.isbn %>">
+          </div>
+          <div class="field">
+            <label>Title</label>
+            <input type="text" name="book[title]" placeholder="Title" autocomplete="off" value="<%= book.title %>">
+          </div>
+          <div class="field">
+            <label>Author Name</label>
+            <input type="text" name="book[author_name]" placeholder="Author Name" autocomplete="off" value="<%= book.author %>">
+          </div>
+          <div class="field">
+            <label>Publisher Name</label>
+            <input type="text" name="book[publisher_name]" placeholder="Publisher Name" autocomplete="off" value="<%= book.publisher %>">
+          </div>
+          <div class="field">
+            <label>Select Genre</label>
+            <select class="ui fluid search dropdown" name="book[genre]">
+              <option value="">Select Genre</option>
+              <% genres.forEach((genre) => { %>
+                <% if(genre.name === book.genre) { %>
+                  <option value="<%= genre.id %>" selected><%= genre.name %></option>
+                <% } else { %>
+                  <option value="<%= genre.id %>"><%= genre.name %></option>                
+                <% } %>
+              <% }) %>
+            </select>
+          </div>
+          <div class="field">
+            <label>Image URL</label>
+            <% if(book.image_url !== 'https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF') { %>
+              <input type="text" name="book[image_url]" placeholder="Book Image" autocomplete="off" value="<%= book.image_url %>">
+            <% } else { %>
+              <input type="text" name="book[image_url]" placeholder="Book Image" autocomplete="off">
+            <% } %>
+          </div>
+          <div class="field">
+            <label>Description</label>
+            <textarea name="book[description]" rows="8" cols="80" placeholder="Description"><%= book.description %></textarea>
+          </div>
+          <button class="ui green button" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer %>
