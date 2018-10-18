@@ -53,7 +53,8 @@ router.post(
 );
 
 router.get('/logout', (req, res) => {
-  res.send('logoutLogic');
+  req.logout();
+  res.redirect('back');
 });
 
 module.exports = router;

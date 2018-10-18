@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -14,32 +15,38 @@
 
   <title>Nibrary</title>
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-md fixed-top">
-  <a class="navbar-brand" href="/">Nibrary</a>
-  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-    <ul class="navbar-nav ml-auto">
-    <% if(currentUser && currentUser.isAdmin) { %>
-      <li class="nav-item active mr-2">
-        <a class="nav-link" href="/books/new"><i class="fas fa-plus-circle"></i></a>
-      </li>
-    <% } %>
-      <li class="nav-item mr-2 active">
-        <a href="/books" class="nav-link ui violet button">See All Books</i></a>
-      </li>
-      <% if(!currentUser) { %>
+  <nav class="navbar navbar-expand-md fixed-top">
+    <a class="navbar-brand" href="/">Nibrary</a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+      <ul class="navbar-nav ml-auto">
+        <% if(currentUser && currentUser.isAdmin) { %>
+        <li class="nav-item active mr-2">
+          <a class="nav-link" href="/books/new"><i class="fas fa-plus-circle"></i></a>
+        </li>
+        <% } %>
+        <li class="nav-item mr-2 active">
+          <a href="/books" class="nav-link ui violet button">See All Books</i></a>
+        </li>
+        <% if(currentUser) { %>
+        <li class="nav-item mr-2">
+          <a href="/logout" class="nav-link ui button">Logout</a>
+        </li>
+        <% } else { %>
         <li class="nav-item mr-2">
           <div class="ui buttons">
             <a class="ui green button" href="/login">Sign In</a>
             <div class="or" data-text="OR"></div>
-            <a class="ui blue button"href="/register" >Sign Up</a>
+            <a class="ui blue button" href="/register">Sign Up</a>
           </div>
         </li>
-      <% } %>
-    </ul>
-  </div>
-</nav>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
