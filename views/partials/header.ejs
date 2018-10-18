@@ -26,9 +26,9 @@
     </button>
     <div class="navbar-collapse collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto">
-        <% if(currentUser && currentUser.isAdmin) { %>
+        <% if(currentUser && currentUser.isadmin) { %>
         <li class="nav-item active mr-2">
-          <a class="nav-link" href="/books/new"><i class="fas fa-plus-circle"></i></a>
+          <a class="nav-link ui violet button" href="/books/new">Add New Books <i class="fas fa-plus-circle"></i></a>
         </li>
         <% } %>
         <li class="nav-item mr-2 active">

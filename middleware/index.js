@@ -4,7 +4,7 @@ const middlewareObject = {};
 
 middlewareObject.checkIsAdmin = (req, res, next) => {
   if (res.locals.currentUser) {
-    const isAdmin = res.locals.currentUser.isAdmin;
+    const isAdmin = res.locals.currentUser.isadmin;
     if (isAdmin) {
       return next();
     } else {
