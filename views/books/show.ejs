@@ -9,40 +9,63 @@
             <img src="<%= book.image_url %>" class="coverImage ui image fluid">
           </div>
           <div class="content">
-            <a href="/books/<%= book.id %>" class="header"><%= book.title %></a>
+            <a href="/books/<%= book.id %>" class="header">
+              <%= book.title %></a>
             <div class="ui relaxed divided list">
               <div class="item">
                 <div class="content">
-                  <p>Author: <%= book.author %></p>
+                  <p>Author:
+                    <%= book.author %>
+                  </p>
                 </div>
               </div>
               <div class="item">
                 <div class="content">
-                  <p>Publisher: <%= book.publisher %></p>
+                  <p>Publisher:
+                    <%= book.publisher %>
+                  </p>
                 </div>
               </div>
               <div class="item">
                 <div class="content">
-                  <p>ISBN: <%= book.isbn %></p>
+                  <p>ISBN:
+                    <%= book.isbn %>
+                  </p>
                 </div>
               </div>
               <div class="item">
                 <div class="content">
-                Rating:
-                <div class="ui star rating" data-rating="<%= book.rating %>"></div>
+                  Rating:
+                  <div class="ui star rating" data-rating="<%= book.rating %>"></div>
                 </div>
               </div>
             </div>
           </div>
+          <% if(currentUser) { %>
+          <% if(currentUser.isAdmin) { %>
           <div class="extra mx-auto">
-          <div class="ui buttons">
-            <a href="/books/edit/<%= book.id %>" class="ui yellow button">Edit</a>
-            <div class="or"></div>
-            <form action="/books/<%= book.id %>?_method=DELETE" method="POST">
-              <input type="Submit" class="ui red button" value="Delete">
-            </form> 
+            <div class="ui buttons">
+              <a href="/books/edit/<%= book.id %>" class="ui yellow button">Edit</a>
+              <div class="or" data-text="OR"></div>
+              <form action="/books/<%= book.id %>?_method=DELETE" method="POST">
+                <input type="Submit" class="ui red button" value="Delete" id="deleteButton">
+              </form>
+            </div>
           </div>
+          <% } else { %>
+          <div class="mx-auto">
+            <div class="ui buttons">
+              <form action="/books/<%= book.id %>/cart" method="POST">
+                <input type="Submit" class="ui yellow button" value="Add to Cart" id="deleteButton">
+              </form>
+              <div class="or" data-text="OR"></div>
+              <form action="/books/<%= book.id %>/delete" method="POST">
+                <input type="Submit" class="ui purple button" value="Purchase" id="deleteButton">
+              </form>
+            </div>
           </div>
+          <% } %>
+          <% } %>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 const express = require('express'),
   pool = require('../database/database'),
-  router = express.Router();
+  router = express.Router(),
+  middleware = require('../middleware/index');
 
 // BOOKS ROUTES
 
@@ -17,17 +18,18 @@ router.get('/', (req, res) => {
   );
 });
 
-router.get('/new', (req, res) => {
+router.get('/new', middleware.checkIsAdmin, (req, res) => {
   pool.query(`SELECT * FROM genre`, (err, response) => {
     if (err) {
       console.log(err);
     } else {
+      console.log(response.rows);
       res.render('./books/new', { genres: response.rows });
     }
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', middleware.checkIsAdmin, (req, res) => {
   if (req.body.book.image_url === '') {
     req.body.book.image_url =
       'https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF';
@@ -66,7 +68,7 @@ router.get('/:id', (req, res) => {
   );
 });
 
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', middleware.checkIsAdmin, (req, res) => {
   pool.query(`SELECT * FROM genre`, (err, response_genre) => {
     if (err) {
       console.log(err);
@@ -90,11 +92,11 @@ router.get('/edit/:id', (req, res) => {
   });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', middleware.checkIsAdmin, (req, res) => {
   res.send('UPDATE Book Details Logic');
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', middleware.checkIsAdmin, (req, res) => {
   let id = req.params.id;
   pool.query(`DELETE FROM books WHERE id = ${id}`, (err, response) => {
     if (err) {
