@@ -40,32 +40,37 @@
                 </div>
               </div>
             </div>
-          </div>
-          <% if(currentUser) { %>
-          <% if(currentUser.isAdmin) { %>
-          <div class="extra mx-auto">
-            <div class="ui buttons">
-              <a href="/books/edit/<%= book.id %>" class="ui yellow button">Edit</a>
-              <div class="or" data-text="OR"></div>
-              <form action="/books/<%= book.id %>?_method=DELETE" method="POST">
-                <input type="Submit" class="ui red button" value="Delete" id="deleteButton">
-              </form>
+            <div class="ui very relaxed list">
+              <div class="item">
+                <div class="content d-flex justify-content-center">
+                  <% if(currentUser && currentUser.isadmin) { %>
+                  <div class="ui buttons">
+                    <a href="/books/edit/<%= book.id %>" class="ui yellow button">Edit</a>
+                    <div class="or" data-text="OR"></div>
+                    <form action="/books/<%= book.id %>?_method=DELETE" method="POST">
+                      <input type="Submit" class="ui red button" value="Delete" id="deleteButton">
+                    </form>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
+              <div class="item">
+                <div class="content d-flex justify-content-center">
+                  <% if(currentUser) { %>
+                  <div class="ui buttons">
+                    <form action="/books/<%= book.id %>/cart" method="POST">
+                      <input type="Submit" class="ui yellow button" value="Add to Cart" id="addToCartButton">
+                    </form>
+                    <div class="or" data-text="OR"></div>
+                    <form action="/books/purchase/<%= book.id %>" method="POST">
+                      <input type="Submit" class="ui purple button" value="Purchase" id="purchaseButton">
+                    </form>
+                  </div>
+                  <% } %>
+                </div>
+              </div>
             </div>
           </div>
-          <% } else { %>
-          <div class="mx-auto">
-            <div class="ui buttons">
-              <form action="/books/<%= book.id %>/cart" method="POST">
-                <input type="Submit" class="ui yellow button" value="Add to Cart" id="deleteButton">
-              </form>
-              <div class="or" data-text="OR"></div>
-              <form action="/books/<%= book.id %>/delete" method="POST">
-                <input type="Submit" class="ui purple button" value="Purchase" id="deleteButton">
-              </form>
-            </div>
-          </div>
-          <% } %>
-          <% } %>
         </div>
       </div>
 

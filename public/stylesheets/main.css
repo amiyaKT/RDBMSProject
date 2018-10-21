@@ -65,3 +65,13 @@ nav {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+#addToCartButton {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#purchaseButton {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

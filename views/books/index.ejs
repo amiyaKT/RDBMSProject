@@ -1,48 +1,55 @@
 <% include ../partials/header %>
 
 <section id="books">
-  <div class="container-fluid">
-    <div class="row">
-      <% books.forEach((book) => { %>
-        <div class="col-md-4">
-          <div class="ui card mx-auto">
-            <div class="image">
-              <img src="<%= book.image_url %>" class="coverImage ui image fluid">
-            </div>
-            <div class="content">
-              <a href="/books/<%= book.id %>" class="header"><%= book.title %></a>
-              <div class="ui relaxed divided list">
-                <div class="item">
-                  <div class="content">
-                    <p>Author: <%= book.author %></p>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="content">
-                    <p>Publisher: <%= book.publisher %></p>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="content">
-                    <p>ISBN: <%= book.isbn %></p>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="content">
-                  Rating:
-                  <div class="ui star rating" data-rating="<%= book.rating %>"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="extra center aligned">
-              <a href="/books/<%= book.id %>" class="ui positive button">Read More</a>
-            </div>
-          </div>
-        </div>
-      <% }) %>
-    </div>
-  </div>
+	<div class="container-fluid">
+		<div class="row">
+			<% books.forEach((book) => { %>
+			<div class="col-md-4">
+				<div class="ui card mx-auto">
+					<div class="image">
+						<img src="<%= book.image_url %>" class="coverImage ui image fluid">
+					</div>
+					<div class="content">
+						<a href="/books/<%= book.id %>" class="header">
+							<%= book.title %></a>
+						<div class="ui relaxed divided list">
+							<div class="item">
+								<div class="content">
+									<p>Author:
+										<%= book.author %>
+									</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									<p>Publisher:
+										<%= book.publisher %>
+									</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									<p>ISBN:
+										<%= book.isbn %>
+									</p>
+								</div>
+							</div>
+							<div class="item">
+								<div class="content">
+									Rating:
+									<div class="ui star rating" data-rating="<%= book.rating %>"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="extra center aligned">
+						<a href="/books/<%= book.id %>" class="ui positive button">Read More</a>
+					</div>
+				</div>
+			</div>
+			<% }) %>
+		</div>
+	</div>
 </section>
 
 <% include ../partials/footer %>

@@ -1,0 +1,24 @@
+<% include ../partials/header %>
+
+<section id="rateBook">
+  <div class="container-fluid">
+    <div class="row w-100">
+      <div class="col-md-6 mx-auto">
+        <div class="ui segment">
+          <div class="content">
+            <div class="ui header">
+              <h1>Rate Your Purchase</h1>
+            </div>
+            <div class="ui star rating mb-3" id="userRating" data-max-rating="5"></div>
+            <form action="/books/rate/<%= book_id %>" class="ui form" method="POST">
+              <input type="number" name="rating" class="d-none" id="ratingInput">
+              <input type="Submit" value="Submit Your Rating" class="ui green button">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% include ../partials/footer %>
