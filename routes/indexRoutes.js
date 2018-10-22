@@ -2,7 +2,8 @@ const express = require('express'),
   pool = require('../database/database.js'),
   router = express.Router(),
   bcrypt = require('bcryptjs'),
-  passport = require('passport');
+  passport = require('passport'),
+  middleware = require('../middleware/index');
 
 const saltRounds = 10;
 
@@ -53,7 +54,7 @@ router.post(
   })
 );
 
-router.get('/logout', (req, res) => {
+router.get('/logout', middleware.isAuthenticated, (req, res) => {
   req.logout();
   res.redirect('back');
 });

@@ -22,21 +22,21 @@
     <a class="navbar-brand" href="/">Nibrary</a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <i class="fas fa-bars"></i>
     </button>
     <div class="navbar-collapse collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto">
         <% if(currentUser && currentUser.isadmin) { %>
         <li class="nav-item active mr-2">
-          <a class="nav-link ui violet button" href="/books/new">Add New Books <i class="fas fa-plus-circle"></i></a>
+          <a class="nav-link" href="/books/new">Add New Books <i class="fas fa-plus-circle"></i></a>
         </li>
         <% } %>
-        <li class="nav-item mr-2 active">
-          <a href="/books" class="nav-link ui violet button">See All Books</i></a>
+        <li class="nav-item mr-2">
+          <a href="/books" class="nav-link">See All Books</i></a>
         </li>
         <% if(currentUser) { %>
         <li class="nav-item mr-2">
-          <a href="/logout" class="nav-link ui button">Logout</a>
+          <a href="/logout" class="nav-link">Logout</a>
         </li>
         <% } else { %>
         <li class="nav-item mr-2">

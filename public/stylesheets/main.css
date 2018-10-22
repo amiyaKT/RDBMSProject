@@ -15,6 +15,10 @@
   color: rgba(0, 0, 0, 1);
 }
 
+.navbar-light .navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;..');
+}
+
 /* Navbar */
 nav {
   background: white;
@@ -23,6 +27,37 @@ nav {
 
 #addButton {
   font-size: 1.3rem;
+}
+
+.nav-item {
+  border: 2px solid transparent;
+  transition: border 1s;
+}
+
+.nav-item.active {
+  border-bottom: 2px solid red;
+}
+
+.nav-item.active:hover {
+  border-bottom: 2px solid red;
+}
+
+.nav-item:hover {
+  border-bottom: 2px solid black;
+}
+
+@media (max-width: 768px) {
+  .nav-item {
+    padding-left: 5px;
+    border: 2px solid transparent;
+  }
+  .nav-item.active {
+    border-left: 2px solid red;
+    border-bottom-color: transparent;
+  }
+  .nav-item:hover {
+    border-bottom-color: transparent;
+  }
 }
 
 /* Login form */
