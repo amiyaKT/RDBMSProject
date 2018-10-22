@@ -88,6 +88,16 @@ nav {
   height: 100vh;
 }
 
+@media (max-width: 768px) {
+  #register .container-fluid {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 /* Error Page */
 #error .container-fluid {
   margin-top: 0;
