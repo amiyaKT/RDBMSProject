@@ -46,6 +46,10 @@ nav {
   border-bottom: 2px solid black;
 }
 
+#authenticationButtons:hover {
+  border-bottom-color: transparent;
+}
+
 @media (max-width: 768px) {
   .nav-item {
     padding-left: 5px;
@@ -56,6 +60,9 @@ nav {
     border-bottom-color: transparent;
   }
   .nav-item:hover {
+    border-bottom-color: transparent;
+  }
+  #authenticationButtons:hover {
     border-bottom-color: transparent;
   }
 }
