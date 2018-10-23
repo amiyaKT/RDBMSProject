@@ -5,16 +5,21 @@ const express = require('express'),
 
 // ADD A NEW COMMENT
 
-router.post("/books/:id/comments/new", middleware.isAuthenticated,(req,res)=>{
-  pool.query(`INSERT INTO comments VALUES(${req.locals.currentUser.id}, ${req.body.comm}, ${req.params.id}
-  )`,(err, res) => {
+router.post("/books/:id/comments/new", middleware.isAuthenticated, (req,res)=>{
+  pool.query(`INSERT INTO comments  VALUES(${res.locals.currentUser.id}, '${req.body.comm}', ${req.params.id}
+)`,(err, response) => {
     if(err){
       console.log(err);
     } else {
-      res.render(`books/${req.params.id}`);
+      res.redirect(`books/${req.params.id}`);
     }
   });
 });
 
+// UPDATE COMMENTS
+
+
+
+// DELETE COMMENTS
 
 module.exports = router;

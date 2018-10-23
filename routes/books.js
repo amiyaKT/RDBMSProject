@@ -64,7 +64,7 @@ router.get('/:id', (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        pool.query(`SELECT c.comment AS comment, u.username AS user FROM comment c, books b, users u WHERE u.id = c.user_id AND c.book_id = b.id AND b.id = ${req.params.id}`, (err, res_comments){
+        pool.query(`SELECT c.comment AS comment, u.username AS user FROM comments c, books b, users u WHERE u.id = c.user_id AND c.book_id = b.id AND b.id = ${req.params.id}`, (err, res_comments)=>{
           // res.send(response.rows[0]);
           res.render('./books/show', {
             book: response.rows[0],
