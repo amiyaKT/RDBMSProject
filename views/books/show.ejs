@@ -92,6 +92,11 @@
       </div>
     </div>
   </div>
+  <% for(var i = 0; i < comm.length; i++){ %>
+    <div>
+       <p><%= comm[i].user %> : <%= comm[i].comment %></p>
+    </div>
+  <%}%>
 </section>
 
 <% include ../partials/footer %>
