@@ -92,14 +92,17 @@
       </div>
     </div>
   </div>
-  <form action="/books/<%= book.id %>/comments/new" method="POST">
-    <textarea name="comm" rows="8" cols="80"></textarea>
+  <form action="/comments/<%= book.id %>" method="POST">
+    <textarea name="comment" rows="8" cols="80"></textarea>
     <button>Submit</button>
   </form>
   <% for(var i = 0; i < comm.length; i++){ %>
-    <div>
-       <p><%= comm[i].user %> : <%= comm[i].comment %></p>
-    </div>
+  <div>
+    <p>
+      <%= comm[i].user %> :
+      <%= comm[i].comment %>
+    </p>
+  </div>
   <%}%>
 </section>
 

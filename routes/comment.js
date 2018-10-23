@@ -5,16 +5,20 @@ const express = require('express'),
 
 // ADD A NEW COMMENT
 
-router.post("/books/:id/comments/new", middleware.isAuthenticated,(req,res)=>{
-  pool.query(`INSERT INTO comments VALUES(${req.locals.currentUser.id}, ${req.body.comm}, ${req.params.id}
-  )`,(err, res) => {
-    if(err){
-      console.log(err);
-    } else {
-      res.render(`books/${req.params.id}`);
+router.post('/:id', middleware.isAuthenticated, (req, res) => {
+  pool.query(
+    `INSERT INTO comments(user_id, comment, book_id) VALUES(${
+      res.locals.currentUser.id
+    },'${req.body.comment}', ${req.params.id}
+  )`,
+    (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect(`/books/${req.params.id}`);
+      }
     }
-  });
+  );
 });
-
 
 module.exports = router;
