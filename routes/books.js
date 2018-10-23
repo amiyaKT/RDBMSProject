@@ -36,6 +36,10 @@ router.post('/', middleware.checkIsAdmin, (req, res) => {
     req.body.book.image_url =
       'https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF';
   }
+  req.body.book.description = req.body.book.description.replace(
+    new RegExp('\r?\n', 'g'),
+    '<br />'
+  );
   pool.query(
     `INSERT INTO books(ISBN, title, author, publisher, image_url, description, genre) VALUES('${
       req.body.book.ISBN
