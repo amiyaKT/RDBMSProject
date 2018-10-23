@@ -76,7 +76,7 @@ router.get('/:id', (req, res) => {
             // res.send(response.rows[0]);
             res.render('./books/show', {
               book: response.rows[0],
-              comm: res_comments.rows
+              comments: res_comments.rows
             });
           }
         );

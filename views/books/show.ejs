@@ -92,18 +92,44 @@
       </div>
     </div>
   </div>
-  <form action="/comments/<%= book.id %>" method="POST">
-    <textarea name="comment" rows="8" cols="80"></textarea>
-    <button>Submit</button>
-  </form>
-  <% for(var i = 0; i < comm.length; i++){ %>
-  <div>
-    <p>
-      <%= comm[i].user %> :
-      <%- comm[i].comment %>
-    </p>
+</section>
+
+<section id="comments">
+  <div class="container-fluid mb-3">
+    <div class="row mb-2">
+      <div class="col-md-10 mx-auto">
+        <form action="/comments/<%= book.id %>" method="POST" class="ui form">
+          <h2 class="ui dividing header">Leave Your Review</h2>
+          <div class="field">
+            <textarea name="comment" rows="3"></textarea>
+          </div>
+          <button class=" ui orange button float-right">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-10 mx-auto">
+        <div class="ui comments">
+          <h2 class="ui dividing header">Read Other People's Opinion</h2>
+          <% comments.forEach((comment) => { %>
+          <div class="comment">
+            <div class="content">
+              <h3 class="author">
+                <%= comment.user %>
+              </h3>
+              <div class="text">
+                <%- comment.comment %>
+              </div>
+              <div class="action">
+                <!-- Add Edit And Delete Buttons Here -->
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
   </div>
-  <%}%>
 </section>
 
 <% include ../partials/footer %>
