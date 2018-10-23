@@ -36,6 +36,10 @@ router.post('/', middleware.checkIsAdmin, (req, res) => {
     req.body.book.image_url =
       'https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF';
   }
+  req.body.book.description = req.body.book.description.replace(
+    new RegExp('\r?\n', 'g'),
+    '<br />'
+  );
   pool.query(
     `INSERT INTO books(ISBN, title, author, publisher, image_url, description, genre) VALUES('${
       req.body.book.ISBN
@@ -64,13 +68,18 @@ router.get('/:id', (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        pool.query(`SELECT c.comment AS comment, u.username AS user FROM comments c, books b, users u WHERE u.id = c.user_id AND c.book_id = b.id AND b.id = ${req.params.id}`, (err, res_comments)=>{
-          // res.send(response.rows[0]);
-          res.render('./books/show', {
-            book: response.rows[0],
-            comm: res_comments.rows
-           });
-        });
+        pool.query(
+          `SELECT c.comment AS comment, u.username AS user FROM comments c, books b, users u WHERE u.id = c.user_id AND c.book_id = b.id AND b.id = ${
+            req.params.id
+          } ORDER BY c.id`,
+          (err, res_comments) => {
+            // res.send(response.rows[0]);
+            res.render('./books/show', {
+              book: response.rows[0],
+              comments: res_comments.rows
+            });
+          }
+        );
       }
     }
   );

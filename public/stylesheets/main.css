@@ -15,10 +15,6 @@
   color: rgba(0, 0, 0, 1);
 }
 
-.navbar-light .navbar-toggler-icon {
-  background-image: url('data:image/svg+xml;..');
-}
-
 /* Navbar */
 nav {
   background: white;
@@ -126,4 +122,8 @@ nav {
 #purchaseButton {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.ui.form textarea {
+  border: 1px solid black;
 }
