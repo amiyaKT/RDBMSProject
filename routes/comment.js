@@ -33,7 +33,7 @@ router.post("/:id/edit/:book", middleware.isAuthenticated, (req, res) => {
     new RegExp('\r?\n', 'g'),
     '<br />'
   );
-  pool.query(`UPDATE comments SET comment = $$${req.body.comment}$$ WHERE id = ${req.params.id}` , (err, response)=>{
+  pool.query(`UPDATE comments SET comment = $$${req.body.comm_edited}$$ WHERE id = ${req.params.id}` , (err, response)=>{
     if(err){
       console.log(err);
     } else {

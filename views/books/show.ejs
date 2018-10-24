@@ -124,7 +124,7 @@
                 <!-- Add Edit And Delete Buttons Here -->
                 <% if(currentUser.id === comment.user_id || currentUser.isAdmin) { %>
                   <button id="comment_edit">EDIT</button>
-                  <form action="comments/<%= comment.id %>/edit/<%= book.id %>">
+                  <form action="comments/<%= comment.id %>/del/<%= book.id %>">
                     <button>DELETE</button>
                   </form>
                   <div id="edit_form" class="modal">
@@ -136,8 +136,9 @@
                       <% } else {%>
                         <p>EDIT COMMENT</p>
                       <% } %>
-                      <form action="comments/<%= comment.id %>/del/<%= book.id %>" method="POST">
-                        <button>DELETE</button>
+                      <form action="comments/<%= comment.id %>/edit/<%= book.id %>" method="POST">
+                        <textarea name="comm_edited" rows="8" cols="80"><%= comment.comment %></textarea>
+                        <button>EDIT</button>
                       </form>
                     </div>
                   </div>
