@@ -124,7 +124,7 @@
                 <!-- Add Edit And Delete Buttons Here -->
                 <% if(currentUser.id === comment.user_id || currentUser.isAdmin) { %>
                   <button id="comment_edit">EDIT</button>
-                  <form action="/comments/<%= comment.id %>/del/<%= book.id %>">
+                  <form action="/comments/<%= comment.id %>/del/<%= book.id %>" method="POST">
                     <button>DELETE</button>
                   </form>
                   <div id="edit_form" class="modal">
