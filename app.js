@@ -73,7 +73,8 @@ app.use((req, res, next) => {
 // Require Routes
 const indexRoute = require('./routes/indexRoutes'),
   bookRoute = require('./routes/books'),
-  commentRoute = require('./routes/comment');
+  commentRoute = require('./routes/comment'),
+  cartRoute = require('./routes/cart');
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -82,7 +83,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // ROUTES
 app.use(indexRoute);
 app.use('/books', bookRoute);
-app.use('/comments', commentRoute);
+app.use('/comments', commentRoute),;
+app.use('/cart', cartRoute);
 
 // Error Page Route
 app.get('*', (req, res) => {
