@@ -149,7 +149,13 @@ router.post('/purchase/:id', middleware.isAuthenticated, (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        res.redirect(`/books/rate/${req.params.id}`);
+        pool.query(`DELETE FROM cart WHERE book_id = ${req.params.id} AND user_id = ${res.locals.currentUser.id}`, (err, res_cart)=>{
+          if(err){
+            console.log(err);
+          } else {
+            res.redirect(`/books/rate/${req.params.id}`);
+          }
+        });
       }
     }
   );
