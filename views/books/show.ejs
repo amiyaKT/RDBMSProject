@@ -122,6 +122,26 @@
               </div>
               <div class="action">
                 <!-- Add Edit And Delete Buttons Here -->
+                <% if(currentUser.id === comment.user_id || currentUser.isAdmin) { %>
+                  <button id="comment_edit">EDIT</button>
+                  <form action="comments/<%= comment.id %>/edit/<%= book.id %>">
+                    <button>DELETE</button>
+                  </form>
+                  <div id="edit_form" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <% if(currentUser.id === comment.user_id){ %>
+                        <p>EDIT YOUR COMMENT <%= comment.user %></p>
+                      <% } else {%>
+                        <p>EDIT COMMENT</p>
+                      <% } %>
+                      <form action="comments/<%= comment.id %>/del/<%= book.id %>" method="POST">
+                        <button>DELETE</button>
+                      </form>
+                    </div>
+                  </div>
+                <% } %>
               </div>
             </div>
           </div>
