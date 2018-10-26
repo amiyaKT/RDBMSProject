@@ -19,7 +19,7 @@ router.get("views", middleware.isAuthenticated, (req,res)=>{
 
 router.post("/:id/del",middleware.isAuthenticated ,(req,res)=>{
   pool.query(`DELETE FROM cart WHERE id = ${req.params.id}`, (err, res_cart)=>{
-    if(err){
+    if(err) {
       console.log(err);
     } else {
       res.redirect("/cart/views");
