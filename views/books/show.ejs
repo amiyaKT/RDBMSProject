@@ -58,7 +58,7 @@
                 <div class="content d-flex justify-content-center">
                   <% if(currentUser) { %>
                   <div class="ui buttons">
-                    <form action="/books/<%= book.id %>/cart" method="POST">
+                    <form action="/cart/<%= book.id %>/add" method="POST">
                       <input type="Submit" class="ui yellow button" value="Add to Cart" id="addToCartButton">
                     </form>
                     <div class="or" data-text="OR"></div>

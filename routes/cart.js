@@ -20,6 +20,18 @@ router.get('/:id/view', middleware.isAuthenticated, (req, res) => {
   );
 });
 
+// Add TO Cart
+
+router.post('/:id/add', middleware.isAuthenticated, (req,res)=>{
+  pool.query(`INSERT INTO cart (user_id, book_id) VALUES(${res.locals.currentUser.id}, ${req.params.id})`, (err, response) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.redirect('/books/${req.params.id}/');
+    }
+  });
+});
+
 // manual remove from cart
 
 router.post('/:id/del', middleware.isAuthenticated, (req, res) => {
