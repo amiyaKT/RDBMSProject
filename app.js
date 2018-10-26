@@ -83,7 +83,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // ROUTES
 app.use(indexRoute);
 app.use('/books', bookRoute);
-app.use('/comments', commentRoute),;
+app.use('/comments', commentRoute);
 app.use('/cart', cartRoute);
 
 // Error Page Route

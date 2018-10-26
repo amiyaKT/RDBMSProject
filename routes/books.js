@@ -69,7 +69,7 @@ router.get('/:id', (req, res) => {
         console.log(err);
       } else {
         pool.query(
-          `SELECT c.id ,c.user_id AS user_id ,c.comment AS comment, u.username AS user FROM comments c, books b, users u WHERE u.id = c.user_id AND c.book_id = b.id AND b.id = ${
+          `SELECT c.id, c.user_id AS user_id ,c.comment AS comment, u.username AS user FROM comments c, books b, users u WHERE u.id = c.user_id AND c.book_id = b.id AND b.id = ${
             req.params.id
           } ORDER BY c.id`,
           (err, res_comments) => {
@@ -149,13 +149,18 @@ router.post('/purchase/:id', middleware.isAuthenticated, (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        pool.query(`DELETE FROM cart WHERE book_id = ${req.params.id} AND user_id = ${res.locals.currentUser.id}`, (err, res_cart)=>{
-          if(err){
-            console.log(err);
-          } else {
-            res.redirect(`/books/rate/${req.params.id}`);
+        pool.query(
+          `DELETE FROM cart WHERE book_id = ${req.params.id} AND user_id = ${
+            res.locals.currentUser.id
+          }`,
+          (err, res_cart) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.redirect(`/books/rate/${req.params.id}`);
+            }
           }
-        });
+        );
       }
     }
   );

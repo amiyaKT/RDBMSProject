@@ -120,28 +120,44 @@
               <div class="text">
                 <%- comment.comment %>
               </div>
-              <div class="action">
+              <div class="action d-flex flex-direction-row">
                 <!-- Add Edit And Delete Buttons Here -->
-                <% if(currentUser.id === comment.user_id || currentUser.isAdmin) { %>
-                  <button id="comment_edit">EDIT</button>
-                  <form action="/comments/<%= comment.id %>/del/<%= book.id %>" method="POST">
-                    <button>DELETE</button>
-                  </form>
-                  <div id="edit_form" class="modal">
-                    <!-- Modal content -->
+                <% if(currentUser && (currentUser.id === comment.user_id || currentUser.isadmin)) { %>
+
+                <!-- Edit Button -->
+                <button type="button" class="ui yellow button" data-toggle="modal" data-target="#myModal<%= comment.id %>">
+                  Edit
+                </button>
+
+                <!-- Delete Button -->
+                <form action="/comments/<%= comment.id %>/<%= book.id %>?_method=DELETE" method="POST">
+                  <button class="ui red button">DELETE</button>
+                </form>
+
+                <!-- Edit Comment Modal. Data-backdrop is set to false due to a declaring the modal several levels deeper thant the body -->
+                <div class="modal fade" id="myModal<%= comment.id %>" role="dialog" aria-hidden="true" data-backdrop="false">
+                  <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                      <span class="close">&times;</span>
-                      <% if(currentUser.id === comment.user_id){ %>
-                        <p>EDIT YOUR COMMENT <%= comment.user %></p>
-                      <% } else {%>
-                        <p>EDIT COMMENT</p>
-                      <% } %>
-                      <form action="/comments/<%= comment.id %>/edit/<%= book.id %>" method="POST">
-                        <textarea name="comm_edited" rows="8" cols="80"><%= comment.comment %></textarea>
-                        <button>EDIT</button>
-                      </form>
+                      <div class="modal-header">
+                        <h5 class="modal-title">
+                          Edit Comment
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/comments/<%= book.id %>/<%= comment.id %>?_method=PUT" method="post" class="ui form">
+                          <div class="field">
+                            <textarea name="comment" rows="5"><%- comment.comment %></textarea>
+                          </div>
+                          <button type="submit" class="ui violet button">Save Changes</button>
+                        </form>
+                      </div>
                     </div>
                   </div>
+                </div>
+
                 <% } %>
               </div>
             </div>
