@@ -5,7 +5,7 @@ const express = require('express'),
 
 // view all cart content
 
-router.get('/views', middleware.isAuthenticated, (req, res) => {
+router.get('/:id/view', middleware.isAuthenticated, (req, res) => {
   pool.query(
     `SELECT c.id AS id, b.title AS title, c.qty AS qty FROM books b, cart c WHERE c.user_id = ${
       res.locals.currentUser.id
