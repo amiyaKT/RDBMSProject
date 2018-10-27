@@ -1,0 +1,17 @@
+<% include ./partials/header %>
+
+<% if(cart.length === 0) { %>
+  <p>Hey You seem to have nothing in Your cart. Visit <a href="/books">this link</a> to find something add to cart or even buy </p>
+<% } else { %>
+  <p>Title             quantity</p>
+<% for(var i = 0; i < cart.length; i++) { %>
+  <p><%= cart[i].title %> : <%= cart[i].qty %></p>
+  <form action="/books/purchase/<%= book.id %>" method="POST">
+    <input type="Submit" class="ui purple button" value="Purchase" id="purchaseButton">
+  </form>
+  <form action="/cart/<%= cart[i].id %>/del" method="POST">
+    <input type="Submit" class="ui purple button" value="Remove" id="purchaseButton">
+  </form>
+<% } } %>
+
+<% include ./partials/footer %>

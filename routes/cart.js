@@ -5,7 +5,7 @@ const express = require('express'),
 
 // view all cart content
 
-router.get('/views', middleware.isAuthenticated, (req, res) => {
+router.get('/:id/view', middleware.isAuthenticated, (req, res) => {
   pool.query(
     `SELECT c.id AS id, b.title AS title, c.qty AS qty FROM books b, cart c WHERE c.user_id = ${
       res.locals.currentUser.id
@@ -18,6 +18,18 @@ router.get('/views', middleware.isAuthenticated, (req, res) => {
       }
     }
   );
+});
+
+// Add TO Cart
+
+router.post('/:id/add', middleware.isAuthenticated, (req,res)=>{
+  pool.query(`INSERT INTO cart (user_id, book_id) VALUES(${res.locals.currentUser.id}, ${req.params.id})`, (err, response) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.redirect('/books/${req.params.id}/');
+    }
+  });
 });
 
 // manual remove from cart
