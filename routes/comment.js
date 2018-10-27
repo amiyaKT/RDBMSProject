@@ -57,14 +57,13 @@ router.delete(
   '/:id',
   [middleware.isAuthenticated, middleware.checkCommentOwnership],
   (req, res) => {
-    console.log(req.params);
     pool.query(
       `DELETE FROM comments WHERE id = ${req.params.id}`,
       (err, response) => {
         if (err) {
           console.log(err);
         } else {
-          res.redirect(`/books`);
+          res.redirect(`/books/${req.params.book}`);
         }
       }
     );
