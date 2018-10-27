@@ -8,7 +8,7 @@ const express = require('express'),
 const saltRounds = 10;
 
 router.get('/', (req, res) => {
-  // res.send(res.locals.currentUser);
+  // res.send(req.route.stack[0].method);
   res.render('index');
 });
 

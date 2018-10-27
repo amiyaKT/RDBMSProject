@@ -23,4 +23,27 @@ middlewareObject.isAuthenticated = (req, res, next) => {
   }
 };
 
+middlewareObject.checkCommentOwnership = (req, res, next) => {
+  const comment_id = req.params.id;
+  pool.query(
+    `SELECT user_id FROM comments WHERE id = ${comment_id}`,
+    (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const commented_user = response.rows[0].user_id;
+        const requesting_user = res.locals.currentUser.id;
+        if (
+          commented_user === requesting_user ||
+          res.locals.currentUser.isadmin
+        ) {
+          next();
+        } else {
+          res.redirect('/books');
+        }
+      }
+    }
+  );
+};
+
 module.exports = middlewareObject;
