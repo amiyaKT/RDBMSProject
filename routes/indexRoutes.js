@@ -13,33 +13,65 @@ router.get('/', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', { errors: null });
 });
 
 router.post('/register', (req, res) => {
-  const plainPassword = req.body.password;
-  const cuser = req.body;
-  bcrypt.genSalt(saltRounds, (err, salt) => {
-    bcrypt.hash(plainPassword, salt, (err, hash) => {
-      pool.query(
-        `INSERT INTO users(firstname, lastname, password, email, address, username) VALUES('${
-          cuser.firstname
-        }', '${cuser.lastname}', '${hash}', '${cuser.email}', '${
-          cuser.address
-        }', '${cuser.username}')`,
-        (err, response) => {
-          if (err) {
-            console.log(err);
-            res.redirect('/register');
-          } else {
-            passport.authenticate('local')(req, res, () => {
-              res.redirect('/books');
-            });
+  const validationErrors = {};
+  if (req.body.firstname === '') {
+    validationErrors.firstname = true;
+  }
+  if (req.body.lastname === '') {
+    validationErrors.lastname = true;
+  }
+  if (req.body.username === '') {
+    validationErrors.username = true;
+  }
+  if (req.body.email === '') {
+    validationErrors.email = true;
+  }
+  if (req.body.address === '') {
+    validationErrors.address = true;
+  }
+  if (req.body.password === '') {
+    // More password validations
+    validationErrors.password = true;
+  }
+
+  if (
+    validationErrors.firstname ||
+    validationErrors.lastname ||
+    validationErrors.username ||
+    validationErrors.email ||
+    validationErrors.address ||
+    validationErrors.password
+  ) {
+    res.render('register', { errors: validationErrors });
+  } else {
+    const plainPassword = req.body.password;
+    const cuser = req.body;
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+      bcrypt.hash(plainPassword, salt, (err, hash) => {
+        pool.query(
+          `INSERT INTO users(firstname, lastname, password, email, address, username) VALUES('${
+            cuser.firstname
+          }', '${cuser.lastname}', '${hash}', '${cuser.email}', '${
+            cuser.address
+          }', '${cuser.username}')`,
+          (err, response) => {
+            if (err) {
+              console.log(err);
+              res.redirect('/register');
+            } else {
+              passport.authenticate('local')(req, res, () => {
+                res.redirect('/books');
+              });
+            }
           }
-        }
-      );
+        );
+      });
     });
-  });
+  }
 });
 
 router.get('/login', (req, res) => {

@@ -22,3 +22,15 @@ $('#userRating').rating({
     $('#ratingInput').attr('value', rating);
   }
 });
+
+// Validate Form
+$('#register').form({
+  fields: {
+    firstname: 'empty',
+    lastname: 'empty',
+    username: 'empty',
+    email: 'empty',
+    address: 'empty',
+    password: 'empty'
+  }
+});

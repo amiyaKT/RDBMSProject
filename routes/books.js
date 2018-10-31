@@ -42,12 +42,10 @@ router.post('/', middleware.checkIsAdmin, (req, res) => {
   );
   pool.query(
     `INSERT INTO books(ISBN, title, author, publisher, image_url, description, genre) VALUES('${
-      req.body.book.ISBN
-    }', '${req.body.book.title}', '${req.body.book.author_name}', '${
-      req.body.book.publisher_name
-    }', '${req.body.book.image_url}', '${req.body.book.description}', ${
-      req.body.book.genre
-    })`,
+      req.body.ISBN
+    }', '${req.body.title}', '${req.body.author_name}', '${
+      req.body.publisher_name
+    }', '${req.body.image_url}', '${req.body.description}', ${req.body.genre})`,
     (err, response) => {
       if (err) {
         console.log(err.stack);

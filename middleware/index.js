@@ -11,7 +11,7 @@ middlewareObject.checkIsAdmin = (req, res, next) => {
       res.redirect('back');
     }
   } else {
-    res.redirect('back');
+    res.redirect('/login');
   }
 };
 

@@ -1,49 +1,49 @@
 <% include ../partials/header %>
 <div class="container-fluid mb-4">
-	<div class="row">
-		<div class="col-md-6 mx-auto my-auto">
-			<div class="ui segment">
-				<form class="ui form" action="/books" method="POST">
-					<h1 class="ui dividing header">ENTER NEW BOOK DETAILS</h1>
-					<div class="field">
-						<label>ISBN</label>
-						<input type="number" name="book[ISBN]" placeholder="ISBN" autocomplete="off">
-					</div>
-					<div class="field">
-						<label>Title</label>
-						<input type="text" name="book[title]" placeholder="Title" autocomplete="off">
-					</div>
-					<div class="field">
-						<label>Author Name</label>
-						<input type="text" name="book[author_name]" placeholder="Author Name" autocomplete="off">
-					</div>
-					<div class="field">
-						<label>Publisher Name</label>
-						<input type="text" name="book[publisher_name]" placeholder="Publisher Name" autocomplete="off">
-					</div>
-					<div class="field">
-						<label>Select Genre</label>
-						<select class="ui fluid search dropdown" name="book[genre]">
-							<option value="">Select Genre</option>
-							<% genres.forEach((genre) => { %>
-							<option value="<%= genre.id %>">
-								<%= genre.name %>
-							</option>
-							<% }) %>
-						</select>
-					</div>
-					<div class="field">
-						<label>Image URL</label>
-						<input type="text" name="book[image_url]" placeholder="Book Image" autocomplete="off">
-					</div>
-					<div class="field">
-						<label>Description</label>
-						<textarea name="book[description]" rows="8" cols="80" placeholder="Description"></textarea>
-					</div>
-					<button class="ui green button" type="submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-md-6 mx-auto my-auto">
+      <div class="ui segment">
+        <form class="ui form" action="/books" method="POST" id="login">
+          <h1 class="ui dividing header">ENTER NEW BOOK DETAILS</h1>
+          <div class="field">
+            <label>ISBN</label>
+            <input type="number" name="ISBN" placeholder="ISBN" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Title</label>
+            <input type="text" name="title" placeholder="Title" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Author Name</label>
+            <input type="text" name="author_name" placeholder="Author Name" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Publisher Name</label>
+            <input type="text" name="publisher_name" placeholder="Publisher Name" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Select Genre</label>
+            <select class="ui fluid search dropdown" name="genre">
+              <option value="">Select Genre</option>
+              <% genres.forEach((genre) => { %>
+              <option value="<%= genre.id %>">
+                <%= genre.name %>
+              </option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="field">
+            <label>Image URL</label>
+            <input type="text" name="image_url" placeholder="Book Image" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Description</label>
+            <textarea name="description" rows="8" cols="80" placeholder="Description"></textarea>
+          </div>
+          <button class="ui green button" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <% include ../partials/footer %>
