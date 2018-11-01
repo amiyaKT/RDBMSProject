@@ -56,4 +56,22 @@ middlewareObject.checkCommentOwnership = (req, res, next) => {
   );
 };
 
+middlewareObject.checkCartOwner = (req, res, next) => {
+  const cart_id = req.params.id;
+  pool.query(`SELECT user_id FROM cart WHERE id = ${cart_id}`, (err, response) => {
+    if(err){
+      console.log(err);
+    } else {
+      const cart_owner = response.rows[0].user_id;
+      const requesting_user = res.locals.currentUser.id;
+      if(cart_user || requesting_user) next();
+      else if(req.route.stack[0].method === 'delete') next();
+      else {
+        console.log("You are not the owner!!");
+        res.redirect('/cart');
+      }
+    }
+  });
+};
+
 module.exports = middlewareObject;

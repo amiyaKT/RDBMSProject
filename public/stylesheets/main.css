@@ -62,6 +62,10 @@ section {
   color: rgba(0, 0, 0, 1);
 }
 
+#logout:hover {
+  border-bottom-color: transparent;
+}
+
 /* Navbar */
 nav {
   background: white;
@@ -174,7 +178,6 @@ nav {
 .ui.form textarea {
   border: 1px solid black;
 }
-
 /* modal class */
 
 /* The Modal (background) */
