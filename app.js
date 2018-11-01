@@ -1,12 +1,12 @@
 const express = require('express'),
-  bodyParser = require('body-parser'),
-  app = express(),
-  methodOverride = require('method-override'),
-  passport = require('passport'),
-  LocalStrategy = require('passport-local'),
-  pool = require('./database/database'),
-  bcrypt = require('bcryptjs'),
-  session = require('express-session');
+      bodyParser = require('body-parser'),
+      app = express(),
+      methodOverride = require('method-override'),
+      passport = require('passport'),
+      LocalStrategy = require('passport-local'),
+      pool = require('./database/database'),
+      bcrypt = require('bcryptjs'),
+      session = require('express-session');
 
 // Configuring Method_Override)
 app.use(methodOverride('_method'));

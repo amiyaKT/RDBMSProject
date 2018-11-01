@@ -36,10 +36,10 @@
         </li>
         <% if(currentUser) { %>
         <li class="nav-item mr-2">
-          <a href="/cart/<%= currentUser.id %>/view" class="nav-link">See Your Cart</a>
+          <a href="/cart" class="nav-link">See Your Cart</a>
         </li>
         <li class="nav-item mr-2">
-          <a href="/logout" class="nav-link">Logout</a>
+          <a href="/logout" class="nav-link ui red button" id="logout">Logout</a>
         </li>
         <% } else { %>
         <li class="nav-item mr-2" id="authenticationButtons">
