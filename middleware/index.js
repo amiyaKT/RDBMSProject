@@ -3,12 +3,16 @@ const pool = require('../database/database');
 const middlewareObject = {};
 
 middlewareObject.checkIsAdmin = (req, res, next) => {
-  if (res.locals.currentUser) {
-    const isAdmin = res.locals.currentUser.isadmin;
-    if (isAdmin) {
-      return next();
+  if (req.isAuthenticated()) {
+    if (res.locals.currentUser) {
+      const isAdmin = res.locals.currentUser.isadmin;
+      if (isAdmin) {
+        return next();
+      } else {
+        res.redirect('/login');
+      }
     } else {
-      res.redirect('back');
+      res.redirect('/login');
     }
   } else {
     res.redirect('/login');

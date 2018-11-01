@@ -32,11 +32,11 @@ router.get('/new', middleware.checkIsAdmin, (req, res) => {
 
 // Logic to add a new book to the database via the add the new book form
 router.post('/', middleware.checkIsAdmin, (req, res) => {
-  if (req.body.book.image_url === '') {
-    req.body.book.image_url =
+  if (req.body.image_url === '') {
+    req.body.image_url =
       'https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF';
   }
-  req.body.book.description = req.body.book.description.replace(
+  req.body.description = req.body.description.replace(
     new RegExp('\r?\n', 'g'),
     '<br />'
   );
@@ -46,11 +46,32 @@ router.post('/', middleware.checkIsAdmin, (req, res) => {
     }', '${req.body.title}', '${req.body.author_name}', '${
       req.body.publisher_name
     }', '${req.body.image_url}', '${req.body.description}', ${req.body.genre})`,
-    (err, response) => {
+    err => {
       if (err) {
         console.log(err.stack);
       } else {
-        res.redirect('/books');
+        pool.query(
+          `SELECT id FROM books WHERE ISBN = ${req.body.ISBN}`,
+          (err, response) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log(response.rows[0]);
+              pool.query(
+                `INSERT INTO ratings(user_id, book_id, rating) VALUES(0, ${
+                  response.rows[0].id
+                }, 0)`,
+                err => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    res.redirect('/books');
+                  }
+                }
+              );
+            }
+          }
+        );
       }
     }
   );
@@ -124,11 +145,23 @@ router.delete('/:id', middleware.checkIsAdmin, (req, res) => {
         if (err) {
           console.log(err);
         } else {
-          pool.query(`DELETE FROM books WHERE id = ${id}`, err => {
+          pool.query(`DELETE FROM comments WHERE book_id = ${id}`, err => {
             if (err) {
               console.log(err);
             } else {
-              res.redirect('/books');
+              pool.query(`DELETE FROM cart WHERE book_id = ${id}`, err => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  pool.query(`DELETE FROM books WHERE id = ${id}`, err => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      res.redirect('/books');
+                    }
+                  });
+                }
+              });
             }
           });
         }
@@ -197,7 +230,7 @@ router.post('/rate/:id', middleware.isAuthenticated, (req, res) => {
         pool.query(
           `UPDATE books SET rating = (SELECT AVG(rating) FROM ratings WHERE book_id = ${
             req.params.id
-          }) WHERE id = ${req.params.id}`,
+          } AND user_id != 0) WHERE id = ${req.params.id}`,
           (err, response) => {
             if (err) {
               console.log(err);

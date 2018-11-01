@@ -35,7 +35,7 @@ $(document).ready(function() {
       password: 'empty'
     }
   });
-  setTimeout(removeLoader, 2000);
+  setTimeout(removeLoader, 1000);
 });
 
 const removeLoader = () => {
