@@ -3,12 +3,59 @@
 }
 
 /* General Styles */
+
+section {
+  display: none;
+}
+
+#loadingMask {
+  width: 100%;
+  height: 100%;
+  margin-top: 75px;
+  z-index: 99999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#circle1 {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border-color: transparent;
+  border-top: 3px solid red;
+  animation: rotate 1s infinite linear;
+}
+
+#circle2 {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  border-color: transparent;
+  border-bottom: 3px solid blue;
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .container-fluid {
   margin-top: 75px;
 }
 
 .coverImage {
   object-fit: contain;
+}
+
+.ui.buttons .or {
+  z-index: 1;
 }
 
 .ui.buttons .or:before {
@@ -131,9 +178,43 @@ nav {
 .ui.form textarea {
   border: 1px solid black;
 }
+/* modal class */
 
-/* Cart Page */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
 
-#cart .container-fluid {
-  margin-top: 75;
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }

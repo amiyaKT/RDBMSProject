@@ -1,38 +1,82 @@
 <% include ./partials/header %>
+
 <section id="register">
   <div class="container-fluid">
     <div class="row w-100">
       <div class="col-md-8 mx-auto mt-5">
         <div class="ui segment">
-          <form class="ui form" action="/register" method="POST">
+          <form class="ui form" action="/register" method="POST" id="register">
             <h1 class="ui dividing header">Sign Up!</h1>
             <div class="two fields">
-              <div class="field">
+              <% if(errors && errors.firstname) { %>
+              <div class="required field error">
                 <label>Firstname</label>
-                <input type="text" name="firstname" placeholder="Firstname">
+                <input type="text" name="firstname" placeholder="Firstname" id="firstname">
               </div>
-              <div class="field">
+              <% } else { %>
+              <div class="required field">
+                <label>Firstname</label>
+                <input type="text" name="firstname" placeholder="Firstname" id="firstname">
+              </div>
+              <% } %>
+              <% if(errors && errors.lastname) { %>
+              <div class="required field error">
                 <label>Lastname</label>
-                <input type="text" name="lastname" placeholder="Lastname">
+                <input type="text" name="lastname" placeholder="Lastname" id="lastname">
               </div>
+              <% } else { %>
+              <div class="required field">
+                <label>Lastname</label>
+                <input type="text" name="lastname" placeholder="Lastname" id="lastname">
+              </div>
+              <% } %>
             </div>
-            <div class="field">
+            <% if(errors && errors.username) { %>
+            <div class="required field error">
               <label>Username</label>
-              <input type="text" name="username" placeholder="Username">
+              <input type="text" name="username" placeholder="Username" id="username">
             </div>
-            <div class="field">
+            <% } else { %>
+            <div class="required field">
+              <label>Username</label>
+              <input type="text" name="username" placeholder="Username" id="username">
+            </div>
+            <% } %>
+            <% if(errors && errors.email) { %>
+            <div class="required field error">
               <label>Email</label>
-              <input type="email" name="email" placeholder="Email">
+              <input type="email" name="email" placeholder="Email" id="email">
             </div>
-            <div class="field">
+            <% } else { %>
+            <div class="required field">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="Email" id="email">
+            </div>
+            <% } %>
+            <% if(errors && errors.address) { %>
+            <div class="required field error">
               <label>Address</label>
-              <textarea name="address" rows="2" placeholder="Address"></textarea>
+              <textarea name="address" rows="2" placeholder="Address" id="address"></textarea>
             </div>
-            <div class="field">
+            <% } else { %>
+            <div class="required field">
+              <label>Address</label>
+              <textarea name="address" rows="2" placeholder="Address" id="address"></textarea>
+            </div>
+            <% } %>
+            <% if(errors && errors.password) { %>
+            <div class="required field error">
               <label>Password</label>
-              <input type="password" name="password" placeholder="Password">
+              <input type="password" name="password" placeholder="Password" id="password">
             </div>
-            <button class="ui green button" type="submit">Submit</button>
+            <% } else { %>
+            <div class="required field">
+              <label>Password</label>
+              <input type="password" name="password" placeholder="Password" id="password">
+            </div>
+            <% } %>
+            <div class="ui green submit button">Submit</div>
+            <div class="ui reset button">Reset</div>
           </form>
         </div>
       </div>
