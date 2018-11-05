@@ -45,7 +45,9 @@ router.post('/', middleware.checkIsAdmin, (req, res) => {
       req.body.ISBN
     }', '${req.body.title}', '${req.body.author_name}', '${
       req.body.publisher_name
-    }', '${req.body.image_url}', '${req.body.description}', ${req.body.genre})`,
+    }', '${req.body.image_url}', $$${req.body.description}$$, ${
+      req.body.genre
+    })`,
     err => {
       if (err) {
         console.log(err.stack);
@@ -54,9 +56,8 @@ router.post('/', middleware.checkIsAdmin, (req, res) => {
           `SELECT id FROM books WHERE ISBN = ${req.body.ISBN}`,
           (err, response) => {
             if (err) {
-              console.log(err);
+              console.log(err.stack);
             } else {
-              console.log(response.rows[0]);
               pool.query(
                 `INSERT INTO ratings(user_id, book_id, rating) VALUES(0, ${
                   response.rows[0].id
