@@ -1,12 +1,12 @@
 const express = require('express'),
-      bodyParser = require('body-parser'),
-      app = express(),
-      methodOverride = require('method-override'),
-      passport = require('passport'),
-      LocalStrategy = require('passport-local'),
-      pool = require('./database/database'),
-      bcrypt = require('bcryptjs'),
-      session = require('express-session');
+  bodyParser = require('body-parser'),
+  app = express(),
+  methodOverride = require('method-override'),
+  passport = require('passport'),
+  LocalStrategy = require('passport-local'),
+  pool = require('./database/database'),
+  bcrypt = require('bcryptjs'),
+  session = require('express-session');
 
 // Configuring Method_Override)
 app.use(methodOverride('_method'));
@@ -91,7 +91,7 @@ app.get('*', (req, res) => {
   res.render('error');
 });
 
-var server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
+var server_port = process.env.YOUR_PORT || process.env.PORT || 3001;
 var server_host = process.env.YOUR_HOST || '0.0.0.0';
 app.listen(server_port, server_host, () => {
   console.log(`Listening on port ${server_port}`);

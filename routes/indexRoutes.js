@@ -3,13 +3,42 @@ const express = require('express'),
   router = express.Router(),
   bcrypt = require('bcryptjs'),
   passport = require('passport'),
-  middleware = require('../middleware/index');
+  middleware = require('../middleware/index'),
+  { spawn } = require('child_process');
 
 const saltRounds = 10;
 
 router.get('/', (req, res) => {
-  // res.send(req.route.stack[0].method);
-  res.render('index');
+  if (!req.isAuthenticated()) {
+    const pythonProcess = spawn('python', ['./python/script.py']);
+    pythonProcess.stdout.on('data', data => {
+      const response = JSON.parse(data.toString().replace(/'/g, '"'));
+      const recommendedData = [];
+      response.forEach(bookId => {
+        pool.query(`SELECT * FROM books WHERE id = ${bookId}`, (err, resp) => {
+          if (err) {
+            console.log(err);
+          } else {
+            recommendedData.push(resp.rows[0]);
+          }
+        });
+      });
+      setTimeout(() => {
+        res.send(recommendedData);
+      }, 20000);
+    });
+  } else {
+    pool.query(
+      `SELECT * FROM books ORDER BY rating LIMIT 5`,
+      (err, response) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(response.rows);
+        }
+      }
+    );
+  }
 });
 
 router.get('/register', (req, res) => {
