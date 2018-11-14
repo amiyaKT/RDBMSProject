@@ -9,7 +9,7 @@ const express = require('express'),
 const saltRounds = 10;
 
 router.get('/', (req, res) => {
-  if (!req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     const pythonProcess = spawn('python', ['./python/script.py']);
     pythonProcess.stdout.on('data', data => {
       const response = JSON.parse(data.toString().replace(/'/g, '"'));
