@@ -61,7 +61,7 @@ router.post('/', middleware.checkIsAdmin, (req, res) => {
               pool.query(
                 `INSERT INTO ratings(user_id, book_id, rating) VALUES(0, ${
                   response.rows[0].id
-                }, 0)`,
+                }, 1)`,
                 err => {
                   if (err) {
                     console.log(err);

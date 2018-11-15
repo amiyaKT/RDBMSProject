@@ -9,11 +9,26 @@ const express = require('express'),
 const saltRounds = 10;
 
 router.get('/', (req, res) => {
+  pool.query(
+    `SELECT * FROM books ORDER BY random() LIMIT 10`,
+    (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render('index', { books: response.rows });
+      }
+    }
+  );
+});
+
+router.get('/py', (req, res) => {
   if (req.isAuthenticated()) {
-    const pythonProcess = spawn('python', ['./python/script.py']);
+    const userId = res.locals.currentUser.id;
+    const pythonProcess = spawn('python', ['./python/script.py', `${userId}`]);
     pythonProcess.stdout.on('data', data => {
       const response = JSON.parse(data.toString().replace(/'/g, '"'));
       const recommendedData = [];
+      console.log(response);
       response.forEach(bookId => {
         pool.query(`SELECT * FROM books WHERE id = ${bookId}`, (err, resp) => {
           if (err) {
@@ -24,8 +39,8 @@ router.get('/', (req, res) => {
         });
       });
       setTimeout(() => {
-        res.send(recommendedData);
-      }, 20000);
+        res.render('index', { books: recommendedData });
+      }, 200);
     });
   } else {
     pool.query(
@@ -34,7 +49,7 @@ router.get('/', (req, res) => {
         if (err) {
           console.log(err);
         } else {
-          res.send(response.rows);
+          res.render('index', { books: response.rows });
         }
       }
     );

@@ -24,8 +24,8 @@ user_rating = pd.pivot_table(
 correlation_matrix = user_rating.corr(method='pearson')
 
 # Getting the ratings given by the user
-userId = int(18)
-cursor.execute("SELECT * FROM ratings WHERE user_id = 3;")
+userId = 2
+cursor.execute("SELECT * FROM ratings WHERE user_id = " + str(userId) + ";")
 ratings = cursor.fetchall()
 
 # Getting the book list
