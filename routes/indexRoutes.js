@@ -10,7 +10,7 @@ const saltRounds = 10;
 
 router.get('/', (req, res) => {
   pool.query(
-    `SELECT * FROM books ORDER BY random() LIMIT 10`,
+    `SELECT * FROM books WHERE rating > 3 ORDER BY random() LIMIT 10`,
     (err, response) => {
       if (err) {
         console.log(err);
